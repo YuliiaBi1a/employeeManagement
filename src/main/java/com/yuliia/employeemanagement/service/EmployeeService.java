@@ -33,14 +33,14 @@ public class EmployeeService {
     @Transactional
     public Employee createEmployee(EmployeeRequestDTO request) {
 
-        if (employeeRepository.existsById(request.getDni())) {
-            throw new RuntimeException("Employee with DNI " + request.getDni() + " already exists");
+        if (employeeRepository.existsById(request.dni())) {
+            throw new RuntimeException("Employee with DNI " + request.dni() + " already exists");
         }
 
-        Role role = roleRepository.findByName(request.getRole())
+        Role role = roleRepository.findByName(request.role())
                 .orElseThrow(() -> new RuntimeException("Role not found"));
 
-        List<Department> departmentList = departmentRepository.findAllById(request.getDepartmentIds());
+        List<Department> departmentList = departmentRepository.findAllById(request.departmentIds());
         if (departmentList.isEmpty()) {
             throw new RuntimeException("No valid departments found");
         }
@@ -48,14 +48,19 @@ public class EmployeeService {
         Set<Department> departments = new HashSet<>(departmentList);
 
         Employee employee = new Employee(
-                request.getDni(),
-                request.getName(),
-                request.getSurname(),
-                request.getAddress(),
+                request.dni(),
+                request.name(),
+                request.surname(),
+                request.address(),
                 role,
                 departments
         );
 
         return employeeRepository.save(employee);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
     }
 }

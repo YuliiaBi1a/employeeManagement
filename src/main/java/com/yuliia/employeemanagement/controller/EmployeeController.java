@@ -7,20 +7,31 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-    @RestController
-    @RequestMapping("/api/employees")
-    public class EmployeeController {
+import java.util.List;
 
-        private final EmployeeService employeeService;
+@RestController
+@RequestMapping("/api/employees")
+public class EmployeeController {
 
-        public EmployeeController(EmployeeService employeeService) {
-            this.employeeService = employeeService;
-        }
+    private final EmployeeService employeeService;
 
-        @PostMapping
-        public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeRequestDTO request) {
-            Employee newEmployee = employeeService.createEmployee(request);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee);
-        }
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
+
+    @PostMapping
+    public ResponseEntity<Employee> createEmployee(@RequestBody EmployeeRequestDTO request) {
+        Employee newEmployee = employeeService.createEmployee(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllEmployees() {
+        List<Employee> employees = employeeService.getAllEmployees();
+        if (employees.isEmpty()) {
+            return new ResponseEntity<>("No employees found", HttpStatus.NO_CONTENT);
+        }
+        return ResponseEntity.ok(employees);
+    }
+}
 
