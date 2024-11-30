@@ -4,6 +4,7 @@ import com.yuliia.employeemanagement.dto.EmployeeRequestDTO;
 import com.yuliia.employeemanagement.entity.Department;
 import com.yuliia.employeemanagement.entity.Employee;
 import com.yuliia.employeemanagement.entity.Role;
+import com.yuliia.employeemanagement.exceptions.*;
 import com.yuliia.employeemanagement.repository.DepartmentRepository;
 import com.yuliia.employeemanagement.repository.EmployeeRepository;
 import com.yuliia.employeemanagement.repository.RoleRepository;
@@ -34,15 +35,17 @@ public class EmployeeService {
     public Employee createEmployee(EmployeeRequestDTO request) {
 
         if (employeeRepository.existsById(request.dni())) {
-            throw new RuntimeException("Employee with DNI " + request.dni() + " already exists");
+            throw new DuplicateDniException(request.dni());
         }
 
-        Role role = roleRepository.findByName(request.role())
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+        Role role = roleRepository.findByName(request.role()).orElse(null);
+        if (role == null) {
+            throw new InvalidRoleException(request.role());
+        }
 
         List<Department> departmentList = departmentRepository.findAllById(request.departmentIds());
         if (departmentList.isEmpty()) {
-            throw new RuntimeException("No valid departments found");
+            throw new InvalidDepartmentException(request.departmentIds());
         }
 
         Set<Department> departments = new HashSet<>(departmentList);
@@ -60,7 +63,59 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public List<Employee> findAllEmployees() {
+        List<Employee> employees = employeeRepository.findAll();
+        if (employees.isEmpty()) {
+            throw new NoEmployeesFoundException();
+        }
+        return employees;
+    }
+
+    @Transactional(readOnly = true)
+    public Employee findEmployeeById(String dni) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(dni);
+        if (employeeOptional.isPresent()) {
+            return employeeOptional.get();
+        } else {
+            throw new NoDniFoundException(dni);
+        }
+    }
+
+    @Transactional
+    public Employee updateEmployee(String dni, EmployeeRequestDTO request) {
+
+        Optional<Employee> optionalEmployee = employeeRepository.findById(dni);
+        if (optionalEmployee.isEmpty()) {
+            throw new NoDniFoundException(dni);
+        }
+        Employee existingEmployee = optionalEmployee.get();
+
+        existingEmployee.setName(request.name());
+        existingEmployee.setSurname(request.surname());
+        existingEmployee.setAddress(request.address());
+
+        Optional<Role> optionalRole = roleRepository.findByName(request.role());
+        if (optionalRole.isEmpty()) {
+            throw new InvalidRoleException(request.role());
+        }
+        existingEmployee.setRole(optionalRole.get());
+
+        List<Department> departmentList = departmentRepository.findAllById(request.departmentIds());
+        if (departmentList.isEmpty()) {
+            throw new InvalidDepartmentException(request.departmentIds());
+        }
+        existingEmployee.setDepartments(new HashSet<>(departmentList));
+
+        return employeeRepository.save(existingEmployee);
+    }
+
+
+    @Transactional
+    public void deleteEmployeeById(String dni) {
+        Optional<Employee> employeeOptional = employeeRepository.findById(dni);
+        if (employeeOptional.isEmpty()) {
+            throw new NoDniFoundException(dni);
+        }
+        employeeRepository.deleteById(dni);
     }
 }
