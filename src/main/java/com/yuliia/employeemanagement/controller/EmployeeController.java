@@ -5,6 +5,7 @@ import com.yuliia.employeemanagement.entity.Employee;
 import com.yuliia.employeemanagement.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class EmployeeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<?> createEmployee(@RequestBody EmployeeRequestDTO request) {
         Employee newEmployee = employeeService.createEmployee(request);
         return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
@@ -38,12 +40,14 @@ public class EmployeeController {
     }
 
     @PutMapping("/{dni}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<?> updateEmployee(@PathVariable String dni, @RequestBody EmployeeRequestDTO request) {
         Employee updatedEmployee = employeeService.updateEmployee(dni, request);
         return ResponseEntity.ok(updatedEmployee);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<?> deleteEmployeeById(@PathVariable String id) {
         employeeService.deleteEmployeeById(id);
         return new ResponseEntity<>("Employee with ID " + id + " was successfully deleted", HttpStatus.OK);

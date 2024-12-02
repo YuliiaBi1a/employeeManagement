@@ -15,11 +15,10 @@ public class RolService {
 
     @PostConstruct
     public void initRoles() {
-
         if (roleRepository.count() == 0) {
-
-            roleRepository.save(new Role("Administrador"));
-            roleRepository.save(new Role("Consultor"));
+            // Збереження ролей із префіксом ROLE_
+            roleRepository.save(new Role("ROLE_ADMINISTRATOR"));
+            roleRepository.save(new Role("ROLE_CONSULTANT"));
         }
     }
 }

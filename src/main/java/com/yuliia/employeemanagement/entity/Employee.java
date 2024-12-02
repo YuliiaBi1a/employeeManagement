@@ -1,6 +1,11 @@
 package com.yuliia.employeemanagement.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -81,5 +86,13 @@ public class Employee {
     }
     public void setDepartments(Set<Department> departments) {
         this.departments = departments;
+    }
+
+    //methods
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role != null && role.getName() != null) {
+            return Collections.singletonList(new SimpleGrantedAuthority(role.getName()));
+        }
+        return Collections.emptyList();
     }
 }
