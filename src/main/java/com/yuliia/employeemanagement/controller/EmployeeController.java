@@ -50,7 +50,7 @@ public class EmployeeController {
     @PreAuthorize("hasRole('ADMINISTRATOR')")
     public ResponseEntity<?> deleteEmployeeById(@PathVariable String id) {
         employeeService.deleteEmployeeById(id);
-        return new ResponseEntity<>("Employee with ID " + id + " was successfully deleted", HttpStatus.OK);
+        return new ResponseEntity<>("Employee with ID " + id + " was successfully deleted", HttpStatus.NO_CONTENT);
     }
 }
 
