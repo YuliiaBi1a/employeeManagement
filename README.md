@@ -226,7 +226,7 @@ Custom exception classes to handle different types of errors gracefully.
 
 ---
 
-## 🧪 Testing
+## Testing
 The project includes JUnit tests with MockMvc for testing REST endpoints. Unit tests validate CRUD operations and JWT-based authentication.
 ## 📈 Entity Relationship Diagram (ERD)
 [ER Model](src/main/java/com/yuliia/employeemanagement/utils/mer-db-employee-manag.png)
