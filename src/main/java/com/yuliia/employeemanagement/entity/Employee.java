@@ -13,7 +13,7 @@ import java.util.Set;
 public class Employee {
 
     @Id
-    @Column(nullable = false, unique = true)  //DNI = PK
+    @Column(nullable = false, unique = true)
     private String dni;
 
     @Column(nullable = false)
@@ -36,7 +36,7 @@ public class Employee {
     )
     private Set<Department> departments = new HashSet<>();
 
-    // Constructors
+
     public Employee() {}
 
     public Employee(String dni, String name, String surname, String address, Role role, Set<Department> departments) {

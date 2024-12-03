@@ -16,18 +16,17 @@ public class Department {
     @Column(nullable = false, unique = true)
     private String name;
 
-    //constructors
+
     public Department() {
     }
 
     public Department(String name) {
         this.name = name;
     }
-    //getters
+
     public String getName() {
         return name;
     }
-    //setters
 
     public void setName(String name) {
         this.name = name;

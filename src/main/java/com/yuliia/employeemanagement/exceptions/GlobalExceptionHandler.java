@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-//POST
+
     @ExceptionHandler(DuplicateDniException.class)
     public ResponseEntity<String> handleDuplicateDni(DuplicateDniException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);

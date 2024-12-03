@@ -12,7 +12,6 @@ public class Role {
     @Column(nullable = false, unique = true)
     private String name;
 
-    // constructors
     public Role() {
     }
 
@@ -20,7 +19,6 @@ public class Role {
         this.name = name;
     }
 
-    // getters
     public Long getId() {
         return id;
     }
@@ -29,7 +27,6 @@ public class Role {
         return name;
     }
 
-    // setter
     public void setName(String name) {
         this.name = name;
     }

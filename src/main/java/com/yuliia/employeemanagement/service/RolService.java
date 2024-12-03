@@ -16,7 +16,6 @@ public class RolService {
     @PostConstruct
     public void initRoles() {
         if (roleRepository.count() == 0) {
-            // Збереження ролей із префіксом ROLE_
             roleRepository.save(new Role("ROLE_ADMINISTRATOR"));
             roleRepository.save(new Role("ROLE_CONSULTANT"));
         }

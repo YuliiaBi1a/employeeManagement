@@ -10,8 +10,8 @@
 7. [Code Principles](#code-principles)
 8. [Installation & Usage](#installation-usage)
 9. [Testing](#testing)
-10 [Entity Relationship Diagram (ERD)](#entity-relationship-diagram)
-11 [License](#license)
+10. [Entity Relationship Diagram (ERD)](#entity-relationship-diagram)
+11. [License](#license)
 
 ---
 
@@ -158,7 +158,7 @@ src/main/java/com/yuliia/employeemanagement/utils/insomnia_crud_employee.json
 1. Copy the file.
 2. Open Insomnia.
 3. Go to `Application` > `Preferences` > `Data` > `Import Data`.
-4. Select `From File` and choose the downloaded `insomnia-crud-simulation.json` file.
+4. Select `From File` and choose the copied `insomnia-crud-simulation.json` file.
 5. Start testing the CRUD simulation.
 
 ## ✔ Code Principles
@@ -166,20 +166,16 @@ src/main/java/com/yuliia/employeemanagement/utils/insomnia_crud_employee.json
 ### Clean Code
 Emphasis on readability and maintainability.
 
-### SOLID Principles
-#### Single Responsibility
+### SOLID Principles 
+- **Single Responsibility**: 
 Each class has a single, well-defined purpose.
-
-#### Open/Closed
+- **Open/Closed**:
 The code is open for extension but closed for modification.
-
-#### Liskov Substitution
+- **Liskov Substitution**:
 Subtypes can be substituted for their base types without affecting behavior.
-
-#### Interface Segregation
+- **Interface Segregation**:
 Interfaces are designed to have minimal and specific methods.
-
-#### Dependency Inversion
+- **Dependency Inversion**
 High-level modules depend on abstractions, not concrete classes.
 
 ### Error Handling
@@ -197,7 +193,7 @@ Custom exception classes to handle different types of errors gracefully.
 ### Steps to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/yourrepository.git
+   git clone https://github.com/YuliiaBi1a/employeeManagement
     ```
 2. Navigate to the project directory:
     ```
@@ -207,7 +203,7 @@ Custom exception classes to handle different types of errors gracefully.
     ``` bash
    mvn clean install
     ```
-4. Open XAMPP and run Apache(port 80, 443) and MySQL(port 3306) // o install XAMPP if you still haven`t it (https://www.apachefriends.org/)
+4. Open XAMPP, run Apache (port 80, 443) and MySQL (port 3306) // o install XAMPP if you still haven`t it (https://www.apachefriends.org/)
 5. Go to http://localhost/dashboard/ and choose PHPMyAdmin
 6. Create an empty database from SQL window of PHPMyAdmin:
     ``` sql
@@ -224,7 +220,7 @@ Custom exception classes to handle different types of errors gracefully.
     INSERT INTO `employee` (`dni`, `address`, `name`, `surname`, `role_id`) VALUES ('ABC123460', 'New street', 'Admin', 'Admin', '1');
     INSERT INTO `employee_department` (`employee_dni`, `department_id`) VALUES ('ABC123460', '2');
     ```    
-    I also leave here a sample database that you can import into PHPMyAdmin - src/main/java/com/yuliia/employeemanagement/utils/employee_db.sql
+🛢 **I also leave here a sample database that you can import into PHPMyAdmin** - src/main/java/com/yuliia/employeemanagement/utils/employee_db.sql
 ## 🧪 Testing
 The project includes JUnit tests with MockMvc for testing REST endpoints. Unit tests validate CRUD operations and JWT-based authentication.
 ## 📈 Entity Relationship Diagram (ERD)
