@@ -8,7 +8,7 @@
 5. [API Endpoints](#api-endpoints)
 6. [Authentication](#authentication)
 7. [Code Principles](#code-principles)
-8. [Installation & Usage](#installation-usage)
+8. [Installation & Usage](#installation--usage)
 9. [Testing](#testing)
 10. [Entity Relationship Diagram (ERD)](#entity-relationship-diagram)
 11. [Planned Improvements](#planned-improvements)
@@ -160,6 +160,8 @@ src/main/java/com/yuliia/employeemanagement/utils/insomnia_crud_employee.json
 3. Go to `Application` > `Preferences` > `Data` > `Import Data`.
 4. Select `From File` and choose the copied `insomnia-crud-simulation.json` file.
 5. Start testing the CRUD simulation.
+   
+---
 
 ## ✔ Code Principles
 
@@ -221,10 +223,15 @@ Custom exception classes to handle different types of errors gracefully.
     INSERT INTO `employee_department` (`employee_dni`, `department_id`) VALUES ('ABC123460', '2');
     ```    
 🛢 **I also leave here a sample database that you can import into PHPMyAdmin** - src/main/java/com/yuliia/employeemanagement/utils/employee_db.sql
+
+---
+
 ## 🧪 Testing
 The project includes JUnit tests with MockMvc for testing REST endpoints. Unit tests validate CRUD operations and JWT-based authentication.
 ## 📈 Entity Relationship Diagram (ERD)
 [ER Model](src/main/java/com/yuliia/employeemanagement/utils/mer-db-employee-manag.png)
+
+---
 
 ## 🚀 Planned Improvements
 
