@@ -8,9 +8,9 @@
 5. [🔍API Endpoints](#api-endpoints)
 6. [🔐Authentication](#authentication)
 7. [✔Code Principles](#code-principles)
-8. [📀Installation & Usage](#installation-usage)
+8. [📀Installation & Usage](#installation--usage)
 9. [🧪Testing](#testing)
-10. [📈Entity Relationship Diagram (ERD)](#entity-relationship-diagram)
+10. [📈Entity Relationship Diagram](#entity-relationship-diagram)
 11. [🚀Planned Improvements](#planned-improvements)
 
 ---
@@ -228,7 +228,8 @@ Custom exception classes to handle different types of errors gracefully.
 
 ## 🧪Testing
 The project includes JUnit tests with MockMvc for testing REST endpoints. Unit tests validate CRUD operations and JWT-based authentication.
-## 📈Entity Relationship Diagram (ERD)
+
+## 📈Entity Relationship Diagram
 [ER Model](src/main/java/com/yuliia/employeemanagement/utils/mer-db-employee-manag.png)
 
 ---
