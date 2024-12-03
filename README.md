@@ -11,7 +11,7 @@
 8. [Installation & Usage](#installation-usage)
 9. [Testing](#testing)
 10. [Entity Relationship Diagram (ERD)](#entity-relationship-diagram)
-11. [License](#license)
+11. [Planned Improvements](#planned-improvements)
 
 ---
 
